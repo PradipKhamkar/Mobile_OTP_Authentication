@@ -10,7 +10,7 @@ export const validateEmail = (email: any) => {
   return isValid;
 };
 
-export const isValidName = (value: any) => {
+export const validateName = (value: any) => {
   const nameRegex = /^[^\s]+$/;
   const isValid = nameRegex.test(value);
   return isValid;
