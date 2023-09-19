@@ -1,9 +1,14 @@
-import React from 'react'
+import React from "react";
+import Register from "./pages/Register";
+import VerifyOtp from "./pages/VerifyOtp";
 
 const App = () => {
   return (
-    <div>App</div>
-  )
-}
+    <>
+      <Register />
+      <VerifyOtp />
+    </>
+  );
+};
 
-export default App
+export default App;
