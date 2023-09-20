@@ -1,13 +1,8 @@
 import twilio from "twilio";
 
-// const client = twilio(
-//   process.env.TWILIO_ACCOUNT_SID,
-//   process.env.TWILIO_ACCOUNT_TOKEN
-// );
-
 const client = twilio(
-  "AC38bf9d0afce16c5b7a32f07b7503de01",
-  "f1b9e38ba4ac2b39e2ace7afeb078671"
+  process.env.TWILIO_ACCOUNT_SID,
+  process.env.TWILIO_ACCOUNT_TOKEN
 );
 
 export const sendOtpCode = async (phoneNumber: string) => {

@@ -42,9 +42,9 @@ app.listen(PORT, "localhost", () => {
 });
 
 //Acessing Front End Stactic Files
-app.use(express.static(path.join(__dirname, "../client/build")));
+app.use(express.static(path.join(__dirname, "../../client/build")));
 
 //Acessing Front End All URL
 app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "../client/build/index.html"));
+  res.sendFile(path.resolve(__dirname, "../../client/build/index.html"));
 });
