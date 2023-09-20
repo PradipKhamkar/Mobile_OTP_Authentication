@@ -32,7 +32,6 @@ export const verifyOtp = async (
       });
     return response;
   } catch (error) {
-    console.log("errtrigger", error);
     throw error;
   }
 };

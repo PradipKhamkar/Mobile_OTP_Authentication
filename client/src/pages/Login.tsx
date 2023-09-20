@@ -23,7 +23,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [isPasswordHidden, setPasswordHidden] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [countryCode, setCounterCode] = useState("+91");
+  const [countryCode, setCounterCode] = useState("91");
 
   const handelOtpSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -81,13 +81,13 @@ const Login = () => {
                   onChange={(e) => setCounterCode(e.target.value)}
                   className="py-2 px-1 outline-none border-none h-full"
                 >
-                  <option value="+91" selected className="">
+                  <option value="91" selected className="">
                     +91 IN
                   </option>
-                  <option value="+1">+1 US</option>
+                  <option value="1">+1 US</option>
                 </select>
                 <input
-                  type="text"
+                  type="number"
                   value={phoneNumber}
                   onChange={(e) => setPhoneNumber(e.target.value)}
                   className="outline-none border-none  pl-2 w-full h-full"
