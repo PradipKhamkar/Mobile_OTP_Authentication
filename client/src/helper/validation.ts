@@ -1,5 +1,5 @@
 export const validatePassword = (password: any) => {
-  const regexForPassword = /[A-Za-z\d]{8,}/;
+  const regexForPassword = /[A-Za-z\d]{5,}/;
   const isValid = regexForPassword.test(password);
   return isValid;
 };
@@ -13,5 +13,11 @@ export const validateEmail = (email: any) => {
 export const validateName = (value: any) => {
   const nameRegex = /^[^\s]+$/;
   const isValid = nameRegex.test(value);
+  return isValid;
+};
+
+export const validatePhoneNumber = (phoneNumber: any) => {
+  const phoneRegex = /^\d{10}$/;
+  const isValid = phoneRegex.test(phoneNumber);
   return isValid;
 };

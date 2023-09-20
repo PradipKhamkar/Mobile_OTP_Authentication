@@ -10,7 +10,7 @@
 
 body {
   background: #dcdce6;
-  background-image: url("./assets/images/Background.png");
+  background-image: url(../src/assets/images/Background.png);
 }
 
 .glass {

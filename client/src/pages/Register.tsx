@@ -1,19 +1,35 @@
 import React, { useState } from "react";
 import FormContainer from "../components/layout/FormContainer";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import {
   validateEmail,
   validateName,
   validatePassword,
+  validatePhoneNumber,
 } from "../helper/validation";
 import { errorToast, successToast } from "../helper/toast";
-import { sendOtpApi } from "../api/userApis";
+import { useAppDispatch, useAppSelector } from "../hook";
+import {
+  clearError,
+  clearMessage,
+  dispatchSentOtp,
+} from "../redux/sendOtpSlice";
+import { useNavigate } from "react-router-dom";
+import { PiEyeClosedBold } from "react-icons/pi";
 
 const Register = () => {
+  const { loading, error, message, success } = useAppSelector(
+    (state) => state.sendOtp
+  );
+
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isPasswordHidden, setPasswordHidden] = useState(false);
   const [phoneNumber, setPhoneNumber] = useState("");
   const [countryCode, setCounterCode] = useState("+91");
   const [profilePic, setProfilePic] = useState("");
@@ -37,7 +53,9 @@ const Register = () => {
     const isFirstNameValid = validateName(firstName);
     const isLastNameValid = validateName(lastName);
     const isPasswordValid = validatePassword(password);
+    const isValidPhoneNumber = validatePhoneNumber(phoneNumber);
     const isValidEmail = validateEmail(email);
+
     if (!isFirstNameValid) {
       errorToast("Invalid First Name 🙄");
     } else if (!isLastNameValid) {
@@ -45,13 +63,39 @@ const Register = () => {
     } else if (!isValidEmail) {
       errorToast("Invalid Email ID 🙄");
     } else if (!isPasswordValid) {
-      errorToast("Invalid Password 🙄");
+      errorToast("Password At Least 5 Character Avoid Speacial Symbol..!!");
+    } else if (!isValidPhoneNumber) {
+      errorToast("Invalid Phone Number 🙄");
     } else {
-      successToast("Valid data 😍");
-      const a = await sendOtpApi(`${countryCode}${phoneNumber}`, email);
-      console.log(a);
+      dispatch(
+        dispatchSentOtp({
+          firstName,
+          lastName,
+          email,
+          password,
+          profilePic: profilePic?.trim().length !== 0 ? profilePic : null,
+          phoneNumber: `${countryCode.trim()}${phoneNumber.trim()}`,
+        })
+      );
     }
   };
+
+  if (success && message) {
+    successToast(`OTP Sent To ${phoneNumber}`);
+    console.log("hello");
+    dispatch(clearMessage());
+    navigate("/verify", {
+      state: {
+        otpStatus: true,
+      },
+    });
+  }
+
+  if (error && message) {
+    errorToast(message);
+    dispatch(clearError());
+    dispatch(clearMessage());
+  }
 
   return (
     <>
@@ -100,24 +144,32 @@ const Register = () => {
               />
             </div>
             <div className="flex justify-center gap-5 items-center mt-5">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="h-12 bg-white outline-none border-none rounded-xl px-5 w-full"
-                placeholder="Email Id"
-
-                // required
-              />
-
-              <input
-                type="text"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="h-12 bg-white outline-none border-none rounded-xl px-5 w-full"
-                placeholder="Password"
-                // required
-              />
+              <div className="w-full">
+                <input
+                  type="email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="h-12 bg-white outline-none border-none rounded-xl px-5 w-full"
+                  placeholder="Email Id"
+                  // required
+                />
+              </div>
+              <div className="w-full bg-white rounded-xl relative overflow-hidden">
+                <input
+                  type={isPasswordHidden ? "text" : "password"}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="h-12 bg-white outline-none border-none w-full px-5 pr-8"
+                  placeholder="Password"
+                  // required
+                />
+                <div
+                  className="absolute left-[86%] top-[35%]"
+                  onClick={() => setPasswordHidden(!isPasswordHidden)}
+                >
+                  <PiEyeClosedBold />
+                </div>
+              </div>
             </div>
             <div className="w-full mt-5 relative flex justify-center items-center h-12 bg-white  rounded-xl overflow-hidden ">
               <select
@@ -141,11 +193,24 @@ const Register = () => {
               />
             </div>
             <input
+              disabled={loading}
               type="submit"
-              value="Sent OTP"
+              value={loading ? "Sending OTP Wait" : "Sent OTP"}
               className="w-full bg-violet-800 h-12 rounded-lg mt-5 text-white hover:bg-red-400 cursor-pointer outline-none border-none"
             />
           </form>
+          <div className="mt-5 ">
+            <p className="text-sm text-slate-400 text-center">
+              Already have an account?
+              <span
+                className="text-red-400 cursor-pointer"
+                onClick={() => navigate("/login")}
+              >
+                {" "}
+                Login
+              </span>
+            </p>
+          </div>
         </div>
       </FormContainer>
     </>
