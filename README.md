@@ -14,8 +14,8 @@ This project is a Mobile OTP Authentication system developed using the MERN (Mon
 
 ## Features
 
-- 📝 User Registration: Users can create accounts with their email, username, and password.
-- 🔑 User Login: Registered users can log in using their email and password.
+- 📝 User Registration: Users can create accounts with their email, phone number, and password etc.
+- 🔑 User Login: Registered users can log in using their phone number and password.
 - 🔐 OTP Verification: Secure one-time password (OTP) verification via Twilio for added account security.
 - 📋 Profile Management: Users can view profile including a profile picture stored on Cloudinary.
 - 🔒 JWT Authentication: JSON Web Tokens are used for secure user authentication and authorization.
