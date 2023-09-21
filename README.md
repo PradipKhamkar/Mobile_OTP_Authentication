@@ -115,9 +115,9 @@ The following are the API endpoints available in this project:
 - ☁️ **Cloudinary**: A cloud-based image and video management service.
 - 🗺 **IPinfo API**: The trusted source for IP address data
 
-Acknowledgments 🙏
+## Acknowledgments 🙏
+
 Thanks to Twilio, Cloudinary, and Ipinfo for providing their amazing services for this project.
 Special thanks to the MERN Stack and TypeScript communities.
-Happy coding! 👩‍💻👨‍💻
 
----
+Happy coding! 👩‍💻👨‍💻
