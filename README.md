@@ -66,10 +66,10 @@ Before you begin, ensure you have met the following requirements:
    ```env
    MONGODB_URI=your_mongodb_uri
    IP_INFO_TOKEN = your_ip_info_token
-   TWILIO_ACCOUNT_SID = your_twilio_account_sid,
+   TWILIO_ACCOUNT_SID = your_twilio_account_sid
    TWILIO_ACCOUNT_TOKEN = your_twilio_account_token
    TWILIO_SERVICE_ID = your_twilio_service_id
-   JWT_KEY =  jwt_key,
+   JWT_KEY =  jwt_key
    CLOUD_NAME = your_cloudinary_cloud_name
    CLOUD_API_KEY =  your_cloudinary_api_key
    CLOUD_API_SECRET_KEY =  your_cloudinary_api_secret
